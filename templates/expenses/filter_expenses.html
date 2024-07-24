@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <h1 class="my-4">Filtered Expenses</h1>
+        <div class="btn-group mb-4">
+            <button id="dailyBtn" class="btn btn-primary" data-translate="Daily">Daily</button>
+            <button id="monthlyBtn" class="btn btn-primary" data-translate="Monthly">Monthly</button>
+            <button id="yearlyBtn" class="btn btn-primary" data-translate="Yearly">Yearly</button>
+        </div>
+
+        <div class="row" id="expensesList">
+            {% for expense in expenses %}
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-text"><strong data-translate="Amount">Amount:</strong> {{ expense.amount }}</p>
+                            <p class="card-text"><strong data-translate="Description">Description:</strong> {{ expense.description }}</p>
+                            <p class="card-text"><strong data-translate="Date">Date:</strong> {{ expense.date }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('dailyBtn').addEventListener('click', function() {
+            window.location.href = "{% url 'filter_expenses' %}?filter=daily";
+        });
+
+        document.getElementById('monthlyBtn').addEventListener('click', function() {
+            window.location.href = "{% url 'filter_expenses' %}?filter=monthly";
+        });
+
+        document.getElementById('yearlyBtn').addEventListener('click', function() {
+            window.location.href = "{% url 'filter_expenses' %}?filter=yearly";
+        });
+    </script>
+{% endblock %}

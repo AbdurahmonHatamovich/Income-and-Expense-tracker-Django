@@ -1,0 +1,276 @@
+{%load static%}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Incomes and Expenses
+    {%block title%}
+
+    {%endblock%}
+  </title>
+  {# <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> #}
+  <link href="{% static '/css/bootstrap.min.css'%}" rel="stylesheet">
+  <link href="{% static '/css/main.css'%}" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
+    integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
+    crossorigin="anonymous"></script>
+  <link href="{% static 'css/dashboard.css'%}" rel="stylesheet">
+</head>
+
+<body>
+
+  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#" data-translate="">Incomes and Expenses </a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+      data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <select class="selecttt" name="" id="language-select">
+      <option value="eng">Eng</option>
+      <option value="uz">Uz</option>
+      <option value="ru">Ru</option>
+    </select>
+    <span class="navbar-nav px-3">
+        <a class="nav-link">{{request.user.username}}</a>
+    </span>
+    <ul class="navbar-nav px-3">
+      <li class="nav-item text-nowrap">
+        <form action="{% url 'logout'%}" method="post">
+          {%csrf_token%}
+          <input class="text" type="submit" value="Sign Out">
+          }
+        </form>
+      </li>
+    </ul>
+  </header>
+
+  <div class="container-fluid">
+    <div class="row">
+      {# include sidebar #}
+      {% include 'partials/_sidebar.html' %}
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        {%block content%}
+
+        {%endblock%}
+      </main>
+    </div>
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+    integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
+    crossorigin="anonymous">
+
+  </script>
+  <script>
+        const translations = {
+            uz: {
+                Dashboard: "Asosiy sahifa",
+                Incomes_Expenses: "Kirimlar va Xarajatlar",
+                Expenses_Summary: "Umumiy xarajatlar",
+                My_Expenses: "Mening xarajatlarim",
+                Account_Information: " Akkaunt ma'lumoti",
+                Income: "Kirimlar",
+                Add_Income: "Kirim qo'shish",
+                My_Income: "Kirimlar",
+                Edit_Expense: "Xarajatni tahrirlash",
+                Edit_Expenses: "Xarajatlarni tahrirlash",
+                Edit_Income: "Kirimni tahrirlash",
+                Sources: "Kirim turi",
+                Previous: "Oldingi",
+                Next: "Keyingi",
+                Source: "Kirim turi",
+                Edit: "Tahrirlash",
+                Delete: "O'chirish",
+                Description: "Tavsifi",
+                Date_of_Expense: "Xarajatning sanasi",
+                Date_of_Income: "Kirimning sanasi",
+                Date: "Sana",
+                No_results_found: "Hech qanday natija topilmadi",
+                No_expenses_found: "Hech qanday xarajat topilmadi. Boshlash",
+                Expenses: "Xarajatlar",
+                Add_expense: "Xarajat qo'shish",
+                Category: "Kategoriya",
+                Filter: "Filtr",
+                Daily: "Kunlik",
+                Monthly: "Oylik",
+                Yearly: "Yillik",
+                Amount: "Miqdori",
+                Email: "Emailingiz",
+                General: "Umumiy",
+                Settings: "So'zlamar",
+                Income_Summary: "Umumiy kirim",
+                Total_Incomes: "Umumiy Kirim",
+                Total_Expenses: "Umumiy Xarajatlar",
+                Remaining_Balance: "Qolgan balans",
+                Balance: "Hisobim",
+                Summary: "Xulosa",
+                SUMMARY: "Umumiy kirim va harajatlar",
+                Account: "Akkaunt",
+                Sign_Out: "Chiqish",
+                Register: "Ro'yhattan o'tish",
+                Go_to_Main_page: "Asosiy sahifaga otish",
+                Filtered_Expenses: "Filtrlangan xarajatlar",
+                Username: "Foydalanuvchi nomi",
+                Enter_email: "Email kiriting",
+                Password: "Parol",
+                Login: "Kirish",
+                Dont_have_an_Account_Sign_Up: "Akkauntingiz yo'qmi?Royhatdan oting",
+                Already_have_an_Account_Sign_In: "Akkauntingiz bo'rmi? Tizimga kiring",
+                Login_to_Your_Account: "Akkauntizga kiring",
+                You_have_been_logged_Out: "Siz tizimdan chiqdingiz",
+                Register_For_a_Free_Account: "Bepul hisob uchun ro'yxatdan o'ting",
+                Welcome_You_Are_Now_logged_in: "Xush kelibsiz, Siz tizimga kirdingiz",
+
+            },
+            ru: {
+                Dashboard: "Главная страница",
+                Expenses_Summary: "Общие расходы",
+                Incomes_Expenses: "Доходы и Расходы",
+                My_Expenses: "Мои расходы",
+                Account_Information: "Информация об аккаунте",
+                Income: "Доходы",
+                Add_Income: "Добавить доход",
+                My_Income: "Мои доходы",
+                Edit_Expense: "Редактировать расход",
+                Edit_Expenses: "Редактировать расходы",
+                Edit_Income: "Редактировать доход",
+                Sources: "Источник дохода",
+                Previous: "Предыдущий",
+                Next: "Следующий",
+                Source: "Источник",
+                Edit: "Редактировать",
+                Delete: "Удалить",
+                Description: "Описание",
+                Date_of_Expense: "Дата расхода",
+                Date_of_Income: "Дата дохода",
+                Date: "Дата",
+                No_results_found: "Результатов не найдено",
+                No_expenses_found: "Расходов не найдено. Начать",
+                Expenses: "Расходы",
+                Add_expense: "Добавить расход",
+                Category: "Категория",
+                Filter: "Фильтр",
+                Daily: "Ежедневно",
+                Monthly: "Ежемесячно",
+                Yearly: "Ежегодно",
+                Amount: "Сумма",
+                Email: "Ваш Email",
+                General: "Общий",
+                Settings: "Настройки",
+                Income_Summary: "Общие доходы",
+                Total_Incomes: "Общий доход",
+                Total_Expenses: "Общие расходы",
+                Remaining_Balance: "Остаток",
+                Balance: "Баланс",
+                Summary: "Итог",
+                SUMMARY: "Общие доходы и расходы",
+                Account: "Аккаунт",
+                Sign_Out: "Выйти",
+                Register: "Регистрация",
+                Go_to_Main_page: "Перейти на главную страницу",
+                Filtered_Expenses: "Отфильтрованные расходы",
+                Username: "Имя пользователя",
+                Enter_email: "Введите Email",
+                Password: "Пароль",
+                Login: "Войти",
+                Dont_have_an_Account_Sign_Up: "Нет аккаунта? Зарегистрируйтесь",
+                Already_have_an_Account_Sign_In: "Уже есть аккаунт? Войдите",
+                Login_to_Your_Account: "Войдите в свой аккаунт",
+                You_have_been_logged_Out: "Вы вышли из системы",
+                Register_For_a_Free_Account: "Зарегистрируйтесь для бесплатного аккаунта",
+                Welcome_You_Are_Now_logged_in: "Добро пожаловать, вы вошли",
+            },
+            eng: {
+                Dashboard: "Dashboard",
+                Expenses_Summary: "Expenses Summary",
+                My_Expenses: "My Expenses",
+                Incomes_Expenses: "Incomes_Expenses",
+                Account_Information: "Account Information",
+                Income: "Income",
+                Add_Income: "Add Income",
+                My_Income: "My Income",
+                Edit_Expense: "Edit Expense",
+                Edit_Expenses: "Edit Expenses",
+                Edit_Income: "Edit Income",
+                Sources: "Income Source",
+                Previous: "Previous",
+                Next: "Next",
+                Source: "Source",
+                Edit: "Edit",
+                Delete: "Delete",
+                Description: "Description",
+                Date_of_Expense: "Date of Expense",
+                Date_of_Income: "Date of Income",
+                Date: "Date",
+                No_results_found: "No results found",
+                No_expenses_found: "No expenses found. Start",
+                Expenses: "Expenses",
+                Add_expense: "Add Expense",
+                Category: "Category",
+                Filter: "Filter",
+                Daily: "Daily",
+                Monthly: "Monthly",
+                Yearly: "Yearly",
+                Amount: "Amount",
+                Email: "Your Email",
+                General: "General",
+                Settings: "Settings",
+                Income_Summary: "Income Summary",
+                Total_Incomes: "Total Income",
+                Total_Expenses: "Total Expenses",
+                Remaining_Balance: "Remaining Balance",
+                Balance: "Balance",
+                Summary: "Summary",
+                SUMMARY: "Total Income and Expenses",
+                Account: "Account",
+                Sign_Out: "Sign Out",
+                Register: "Register",
+                Go_to_Main_page: "Go to Main Page",
+                Filtered_Expenses: "Filtered Expenses",
+                Username: "Username",
+                Enter_email: "Enter Email",
+                Password: "Password",
+                Login: "Login",
+                Dont_have_an_Account_Sign_Up: "Don't have an account? Sign up",
+                Already_have_an_Account_Sign_In: "Already have an account? Sign in",
+                Login_to_Your_Account: "Login to your account",
+                You_have_been_logged_Out: "You have been logged out",
+                Register_For_a_Free_Account: "Register for a free account",
+                Welcome_You_Are_Now_logged_in: "Welcome, you are now logged in",
+            }
+
+
+        };
+
+        function getTranslation(key, lang) {
+            return translations[lang][key];
+        }
+
+        function changeLanguage() {
+            const selectedLanguage = document.getElementById('language-select').value;
+            document.documentElement.lang = selectedLanguage;
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                element.textContent = getTranslation(key, selectedLanguage);
+            });
+            localStorage.setItem('selectedLanguage', selectedLanguage);
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const storedLanguage = localStorage.getItem("selectedLanguage");
+            if (storedLanguage) {
+                document.getElementById('language-select').value = storedLanguage;
+                changeLanguage();
+            }
+
+            document.getElementById('language-select').addEventListener('change', changeLanguage);
+        });
+    </script>
+  <script src="{%static 'js/main.js'%}"></script>
+</body>
+
+</html>

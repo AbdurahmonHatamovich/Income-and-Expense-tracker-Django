@@ -1,0 +1,54 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<h1>Add Income</h1>
+
+<div class="container-mt-4">
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{%url 'incomes'%}" data-translate="Income">Income</a></li>
+    <li class="breadcrumb-item active" aria-current="page" data-translate="Edit_Income">Edit Income</li>
+  </ol>
+</nav>
+
+
+
+
+<div class="card">
+	<div class="card-body">
+	<form action="{%url 'add-incomes'%}" method="post">
+		{%csrf_token%}
+		{%include 'partials/_messages.html'%}
+		<div class="form-group">
+			<label for="" data-translate="Amount">Amount</label>
+			<input type="number" class="form-control form-control-sm" name="amount" value="{{values.amount}}">
+		</div>
+		<div class="form-group">
+			<label for="" data-translate="Description">Description</label>
+			<input type="text" class="form-control form-control-sm" name="description" value="{{values.description}}">
+		</div>
+		<div class="form-group">
+			<label for="source" data-translate="Source">Source</label>
+			<select name="source" class="form-control">
+				{%for source in sources%}
+					<option value="{{ source.name }}" {% if values.source == source.name %}selected{% endif %}>{{ source.name }}</option>
+				{%endfor%}
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="" data-translate="Date_of_Income">Date of Income</label>
+			<br>
+			<input type="date" class="form-control-sm" name="income_date">
+		</div>
+		<br>
+		<input type="submit" value="Submit" class="btn btn-primary">
+	</form>
+	</div>
+
+</div>
+
+
+</div>
+
+
+{%endblock%}

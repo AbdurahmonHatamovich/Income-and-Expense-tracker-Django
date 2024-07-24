@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{%block content%}
+<div class="container">
+        <h1 class="my-4" data-translate="Balance">Balance</h1>
+        <div class="card">
+            <div class="card-body">
+                <p><strong data-translate="Total_Incomes">Total Incomes:</strong> {{ total_incomes }}</p>
+                <p><strong data-translate="Total_Expenses">Total Expenses:</strong> {{ total_expenses }}</p>
+                <p><strong data-translate="Remaining_Balance">Remaining Balance:</strong> {{ remaining_balance }}</p>
+            </div>
+        </div>
+    </div>
+{%endblock%}

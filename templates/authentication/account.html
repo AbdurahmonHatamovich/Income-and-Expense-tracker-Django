@@ -1,0 +1,23 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Information</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4" data-translate="Account_Information">Account Information</h2>
+        <div class="card">
+            <div class="card-header">
+                <h4>Your Details</h4>
+            </div>
+            <div class="card-body">
+                <p data-translate="Username" class="card-text"><strong>Username:</strong> {{ user.username }}</p>
+                <p data-translate="Email" class="card-text"><strong>Email:</strong> {{ user.email }}</p>
+                <a href="{% url 'incomes' %}" data-translate="Go_to_Main_page"> Go to Main page</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

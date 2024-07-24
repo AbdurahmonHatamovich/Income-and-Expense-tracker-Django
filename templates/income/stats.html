@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-10">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#" data-translate="Income_Summary">Income Summary</a></li>
+                    <li class="breadcrumb-item active" aria-current="page" data-translate="Summary">Summary</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-md-2">
+            <a href="#" class="btn btn-primary" data-translate="Summary">Summary</a>
+        </div>
+    </div>
+    <br>
+    <div class="container" style="width: 30%; height: 30%;">
+        <canvas id="myChart"></canvas>
+    </div>
+    <br>
+    <script src="{% static 'js/incomechart.js' %}"></script>
+</div>
+{% endblock %}
